@@ -1,0 +1,31 @@
+{
+  "name": "node-mongo-push",
+  "version": "0.0.1",
+  "description": "A simple node.js app which pushes a message to users when something is added to mongo via a RESTful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NotBobTheBuilder/node-mongo-push.git"
+  },
+  "keywords": [
+    "mongodb",
+    "node",
+    "REST",
+    "push",
+    "socket.io"
+  ],
+  "author": "Jack Wearden",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/NotBobTheBuilder/node-mongo-push/issues"
+  },
+  "devDependencies": {
+    "express": "~3.3.4",
+    "socket.io": "~0.9.16",
+    "congo": "0.0.3",
+    "grunt": "~0.4.1"
+  }
+}
