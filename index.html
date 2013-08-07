@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+     * Author:    Jack Wearden
+     * Twitter:   @jackweirdy
+     * Website:   https://www.jackwearden.co.uk
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    <title>Node.js push app</title>
+    <style>
+      #container {
+        height: 100%;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Something</h3>
+    <div id="container"></div>
+    <div id="newmsg">
+        <span><input id="hdg" placeholder="heading" type="text"/></span>
+        <span><input id="msg" placeholder="message" type="text"/></span>
+        <span><button>Send</button></span>
+    </div>
+    <script id="template" type="text/template">
+    <div>
+      <h2>heading</h2>
+      <p>message</p>
+    </div>
+    </script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>
+      var socket = io.connect('http://192.168.0.6:3000/');
+      socket.on('newmessages', function (data) {
+        $(
+          $('#template')
+            .html()
+            .replace('heading', data.heading)
+            .replace('message', data.message)
+         ).appendTo('#container');
+        $('body').scrollTop($('body').height());
+      });
+      $('#newmsg button').on('click', function () {
+        $.post('/api/messages', {
+            heading: $('#hdg').val(),
+            message: $('#msg').val()
+          }, function () {
+            $('#hdg').val("");
+            $('#msg').val("");
+        });
+      });
+    </script>
+  </body>
+</html>
